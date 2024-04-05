@@ -1,46 +1,69 @@
 <?php
 require_once('connection.php');
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Check if form is for inserting new record or updating existing record
-        if (isset($_POST['insert'])) {
-            // Prepare an SQL statement for insertion
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['insert'])) {
+        $name = $_POST['name'];
+        $officer = $_POST['officer'];
+        try {
             $stmt = $conn->prepare("INSERT INTO voters (name, officer) VALUES (:name, :officer)");
-            
-            // Bind parameters to the named placeholders
             $stmt->bindParam(':name', $name);
             $stmt->bindParam(':officer', $officer);
-            
-            // Set parameters and execute the statement for insertion
-            $name = $_POST['name'];
-            $officer = $_POST['officer'];
             $stmt->execute();
-            
             header("Location: admin.php");
-        } elseif (isset($_POST['update'])) {
-            // Prepare an SQL statement for updating
+            exit();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    } elseif (isset($_POST['update'])) {
+        $name = $_POST['name'];
+        $officer = $_POST['officer'];
+        $id = $_POST['id'];
+        try {
             $stmt = $conn->prepare("UPDATE voters SET name = :name, officer = :officer WHERE id = :id");
-            
-            // Bind parameters to the named placeholders
             $stmt->bindParam(':name', $name);
             $stmt->bindParam(':officer', $officer);
             $stmt->bindParam(':id', $id);
-            
-            // Set parameters and execute the statement for updating
-            $name = $_POST['name'];
-            $officer = $_POST['officer'];
-            $id = $_POST['id'];
             $stmt->execute();
-            
             header("Location: admin.php");
+            exit();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
+}
 
-    // Fetch voters data
-    $sql_fetch_data = "SELECT id, name, officer,vote_counter FROM voters";
-    $stmt = $conn->query($sql_fetch_data);
-    $voters = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
+    $searchQuery = $_GET['search'];
+    $voters = searchVoters($searchQuery);
+} else {
+    $voters = fetchAllVoters();
+}
 
+function fetchAllVoters() {
+    global $conn;
+    try {
+        $stmt = $conn->query("SELECT id, name, officer, vote_counter FROM voters");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+}
+
+function searchVoters($searchQuery) {
+    global $conn;
+    try {
+        $search = '%' . $searchQuery . '%';
+        $stmt = $conn->prepare("SELECT id, name, officer, vote_counter FROM voters WHERE name LIKE :search");
+        $stmt->bindParam(':search', $search);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +76,16 @@ require_once('connection.php');
 </head>
 
 <body class="bg-gray-100 p-6">
+    
     <h1 class="text-3xl font-bold mb-4">Admin panel</h1>
+    <form action="" method="get" class="mb-6">
+        <div class="flex mb-4">
+            <input type="text" name="search" placeholder="Search by name"
+                class="border border-gray-300 rounded-md px-4 py-2 mr-2">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Search</button>
+            <a href="admin.php" class="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-600 ml-2">Clear</a>
+        </div>
+    </form>
     <form action="" method="post" class="mb-6">
         <input type="hidden" name="id" value="">
         <input type="text" name="name" placeholder="Enter name"

@@ -11,6 +11,9 @@ require_once __DIR__ . '../config/validation.php';
 
         echo Register($username, $email, $password);
 
+        //  header("Location: user.php");
+    exit;
+
     }
 
 
