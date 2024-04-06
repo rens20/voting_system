@@ -23,9 +23,10 @@
             </button>
         </div>
     </div>
-    <div class="text-center py-4 mt-40">
-        <h1 class="text-xl mb-20">Welcome to the voting system</h1>
-    </div>
+   <div class="text-center text-5xl py-4 mt-40">
+  <h1>Welcome to the voting system</h1>
+</div>
+
 
     <!-- JavaScript -->
     <script>
