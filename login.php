@@ -46,6 +46,7 @@ require_once __DIR__ . '../config/validation.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
       <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
@@ -62,12 +63,19 @@ require_once __DIR__ . '../config/validation.php';
                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             placeholder="Username">
                     </div>
-                    <div>
-                        <label for="password" class="sr-only">Password</label>
-                        <input id="password" name="password" type="password" autocomplete="current-password" required
-                            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                            placeholder="Password">
-                    </div>
+                   <div>
+    <label for="password" class="sr-only">Password</label>
+    <div class="relative">
+        <input id="password" name="password" type="password" autocomplete="current-password" required
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Password">
+        <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+            <button type="button" id="togglePassword" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700">
+                <i class="far fa-eye"></i>
+            </button>
+        </div>
+    </div>
+</div>
                 </div>
 
                 <div class="flex items-center justify-between">
@@ -103,8 +111,16 @@ require_once __DIR__ . '../config/validation.php';
             </form>
         </div>
     </div>
+    <script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function () {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.querySelector('i').classList.toggle('fa-eye-slash');
+    });
+</script>
+
 </body>
 </html>
-
-
-<b

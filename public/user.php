@@ -29,6 +29,15 @@ $voters = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
+<header class="bg-blue-500 py-4">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold">Vote App</h1>
+          <a href="../index.php" class="text-white">Logout</a>
+
+        </div>
+    </div>
+</header>
 <div class="container mx-auto px-4 py-8">
     <?php 
     // Array to store voters based on officer type
@@ -83,8 +92,7 @@ $voters = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 }
             };
             xhr.send("voter_id=" + voterId);
-
-              <?php $_SESSION['voted'] = true; ?>;
+            <?php $_SESSION['voted'] = true; ?>;
         }
     }
 </script>
