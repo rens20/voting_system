@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['voter_id'])) {
     // Set the session variable to mark that the user has voted
     $_SESSION['voted'] = true;
 }
-$sql_fetch_data = "SELECT id, name, officer FROM voters";
+$sql_fetch_data = "SELECT id, name, officer,image FROM voters";
 $stmt = $conn->query($sql_fetch_data);
 $voters = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -62,9 +62,11 @@ $voters = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <?php foreach ($voters as $voter): ?>
                     <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                        <div class="px-6 py-4">
-                            <h3 class="text-lg font-semibold mb-2"><?php echo $voter['name']; ?></h3>
+                         <div class="px-6 py-4">
+                             <img src="<?php echo $voter['image']; ?>" alt="Voter Image" class="mt-3 w-full h-auto object-cover">
+                            <h3 class="text-lg font-semibold mb-2 text-center"><?php echo $voter['name']; ?></h3>
                             <p class="text-gray-700">Officer: <?php echo $voter['officer']; ?></p>
+                           
                         </div>
                         <div class="px-6 py-4 bg-gray-100 border-t border-gray-200">
                             <a href="#" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="castVote(<?php echo $voter['id']; ?>, this)">Vote</a>

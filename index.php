@@ -11,26 +11,29 @@
 
 <body class="bg-gray-200">
     <div class="bg-blue-500 p-4 flex justify-between items-center">
-        <div>
-            <h1 class="text-white text-3xl font-bold">Kasiglahan Village National High School </h1>
-        </div>
-        <div class="flex items-center space-x-4">
-            <button id="registerBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition duration-300 ease-in-out transform hover:scale-105">
-                Register
-            </button>
-            <button id="loginBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition duration-300 ease-in-out transform hover:scale-105">
-                Login
-            </button>
-        </div>
+      <div>
+    <h1 class="text-white text-2xl font-bold">
+        <img src="1.png" alt="School Logo" class="h-10 w-auto inline-block mr-2"> 
+        Kasiglahan Village National High School
+    </h1>
+</div>
+<div class="flex items-center space-x-4">
+    <button id="registerBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition duration-300 ease-in-out transform hover:scale-105">
+        Register
+    </button>
+    <button id="loginBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition duration-300 ease-in-out transform hover:scale-105">
+        Login
+    </button>
+</div>
     </div>
     <div class="text-center mt-20">
         <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome to the voting system</h1>
         <p class="text-lg text-gray-600">Please login or register to proceed.</p>
     </div>
 
-    <!-- JavaScript -->
+   
     <script>
-        // Add JavaScript code here
+    
         document.getElementById('loginBtn').addEventListener('click', function() {
             // Redirect to login page
             window.location.href = 'login.php';
