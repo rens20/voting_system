@@ -31,10 +31,12 @@ $voters = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body class="bg-gray-100">
 <header class="bg-blue-500 py-4">
     <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center">
-            <h1 class="text-white text-2xl font-bold">Vote App</h1>
-          <a href="../index.php" class="text-white">Logout</a>
-
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <img src="../image/logo.jpg" alt="School Logo" class="h-16 w-auto rounded opacity-0.5" style="border-radius: 50%;">
+                <h1 class="text-white text-2xl font-bold ml-4">Kasiglahan Village National High School</h1>
+            </div>
+            <a href="../index.php" class="text-white">Logout</a>
         </div>
     </div>
 </header>
@@ -44,9 +46,20 @@ $voters = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $voters_by_type = array(
         'President' => array(),
         'Vice President' => array(),
-        'Surgent' => array(),
-        'Author' => array(),
-        'Secretary' => array()
+        'PIO' => array(),
+        'Secretary' => array(),
+        'Tresurer' => array(),
+        'Auditor' => array(),
+        'protocol officer' => array(),
+        'Representative' => array()
+        //president
+        //vise presendet
+        //pio
+        //secrewtary
+        //tresurer
+        //auditor
+        //protocol officer
+        //prepsentatavivbe
     );
 
     // Group voters by officer type

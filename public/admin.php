@@ -143,9 +143,13 @@ function searchVoters($searchQuery) {
             class="border border-gray-300 rounded-md px-4 py-2 mb-2">
             <option value="President">President</option>
             <option value="Vice President">Vice President</option>
+            <option value="PIO">PIO</option>
             <option value="Secretary">Secretary</option>
+            <option value="Auditor">Auditor</option>
+            <option value="Treasurer">Treasurer</option>
             <option value="Author">Author</option>
-            <option value="Surgent">Surgent</option>
+            <option value="Protocol officers">Protocol officers</option>
+            <option value="Representative">Representative</option>
         </select>
 
         <input type="file" name="image" accept="image/*" class="border border-gray-300 rounded-md px-4 py-2 mb-2">
